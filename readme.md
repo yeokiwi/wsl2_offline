@@ -94,3 +94,6 @@ Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
 Bus 001 Device 003: ID 10c4:ea60 Silicon Labs CP210x UART Bridge
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bingo!
+
+usbipd wsl list
+usbipd wsl attach -a -d <device id> # the -a is key, as BPMP will restart during flashing and need to auto-reattach
