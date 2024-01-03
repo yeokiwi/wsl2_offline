@@ -32,17 +32,21 @@ installation of usbipd
 https://learn.microsoft.com/en-us/windows/wsl/connect-usb
 
 ACTIVATING USB FORWARDING TO WSL2
+
 Purpose: make USB to Serial Bridge accessible in WSL2 to test the RPLidar SDK build on WSL Linux (Ubuntu)
 
 Install usbipd-win on the Windows-host: https://github.com/dorssel/usbipd-win/releases
 
 Install USBIP tools and hardware-database in Linux (WSL)
+
 bernd@myOmen:\~$ sudo apt install linux-tools-generic hwdata
+
 bernd@myOmen:\~$ sudo update-alternatives --install /usr/local/bin/usbip usbip /usr/lib/linux-tools/*-generic/usbip 20
 
 Open Powershell (Administrator)
 
 PS C:\WINDOWS\system32> usbipd list
+
 Output:
 BUSID VID:PID DEVICE STATE
 2-2 10c4:ea60 Silicon Labs CP210x USB to UART Bridge (COM3) Not shared
@@ -66,12 +70,17 @@ BUSID VID:PID DEVICE STATE
 
 "Shared" means ready to be forwarded, but still parked
 
+if it not shared, it must be binded
+usbipd bind -b BUSID
+
 PS C:\WINDOWS\system32> usbipd attach --wsl --busid 2-2 #this will now forward the USB-device. You will hear the "unplug" chime in Windows.
+
 Output:
 usbipd: info: Using WSL distribution 'Ubuntu' to attach; the device will be available in all WSL 2 distributions.
 usbipd: info: Using IP address 172.26.144.1 to reach the host.
 
 PS C:\WINDOWS\system32> usbipd list #check if it worked
+
 Output:
 BUSID VID:PID DEVICE STATE
 2-2 10c4:ea60 Silicon Labs CP210x USB to UART Bridge (COM3) Attached
