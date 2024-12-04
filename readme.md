@@ -97,3 +97,13 @@ Bingo!
 
 usbipd wsl list
 usbipd wsl attach -a -d <device id> # the -a is key, as BPMP will restart during flashing and need to auto-reattach
+
+
+If usbipd cannot attach because of vhci-hcd issue, update wsl kernel
+
+I think I have found the solution to my issue.
+
+It really came from the lack of vhci-hcd module. Since I did not have the courage to recompile the kernel with this module, I tried installing the latest WSL update from there 
+
+https://www.catalog.update.microsoft.com/Search.aspx?q=wsl and selected Windows Subsystem for Linux Update - 5.10.60.1
+
